@@ -48,9 +48,6 @@ private:
 	void LookRightLeft(float inVal);
 
 	UFUNCTION()
-	void TurnForward();
-
-	UFUNCTION()
 	void InteractWithObject();
 
 	UFUNCTION()

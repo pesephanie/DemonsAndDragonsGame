@@ -75,15 +75,13 @@ void ADD_PlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
 
 void ADD_PlayerCharacter::MoveForwardBackward(float inVal) {
 	if (FMath::Abs(inVal) > MovementDeadzone) {
-		//TurnForward();
-		AddMovementInput(CameraSpringArm->GetForwardVector(), inVal * MovementSensitivity);
+		AddMovementInput(PlayerCamera->GetForwardVector(), inVal * MovementSensitivity);
 	}
 }
 
 void ADD_PlayerCharacter::MoveRightLeft(float inVal) {
 	if (FMath::Abs(inVal) > MovementDeadzone) {
-		//TurnForward();
-		AddMovementInput(CameraSpringArm->GetRightVector(), inVal * MovementSensitivity);
+		AddMovementInput(PlayerCamera->GetRightVector(), inVal * MovementSensitivity);
 	}
 }
 
@@ -93,27 +91,14 @@ void ADD_PlayerCharacter::LookUpDown(float inVal) {
 	rot += FRotator{ inVal * CameraSensitivity, 0.f, 0.f };
 	rot.Roll = 0.f;
 	CameraSpringArm->SetWorldRotation(rot);
-
-	//AddControllerPitchInput(inVal * CameraSensitivity);
 }
 
 void ADD_PlayerCharacter::LookRightLeft(float inVal) {
 	// Update camera spring arm
-	/*FRotator rot = CameraSpringArm->GetComponentRotation();
-	rot += FRotator{ 0.f, inVal * CameraSensitivity, 0.f};
+	FRotator rot = CameraSpringArm->GetComponentRotation();
+	rot += FRotator{ 0.f, inVal * CameraSensitivity, 0.f };
 	rot.Roll = 0.f;
-	CameraSpringArm->SetWorldRotation(rot);*/
-
-	AddControllerYawInput(inVal * CameraSensitivity);
-}
-
-void ADD_PlayerCharacter::TurnForward() {
-	FRotator newRot{}; // {GetMesh()->GetComponentRotation()};
-	newRot.Pitch = 0.f;
-	newRot.Yaw = CameraSpringArm->GetComponentRotation().Yaw;
-	newRot.Roll = 0.f;
-	newRot += MeshInitialRotation;
-	GetMesh()->SetWorldRotation(newRot);
+	CameraSpringArm->SetWorldRotation(rot);
 }
 
 /*

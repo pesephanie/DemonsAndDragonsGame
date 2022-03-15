@@ -25,8 +25,9 @@ class DEMONSANDDRAGONS_API IDD_InteractableObjectInterface
 {
 	GENERATED_BODY()
 
-	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
+	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
+
 	/*playerCharacter reference to the player character interacting with this object*/
 	virtual void InteractWith(ADD_PlayerCharacter* playerCharacter) abstract;
 	virtual void StopInteraction() { return; } // Default implementation does nothing - here just in case you want to use it
