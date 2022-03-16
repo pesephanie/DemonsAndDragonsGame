@@ -23,9 +23,15 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-protected:
 	// Custom Blueprint Events
 	
+	/*
+	* Called whenever the weight on this plate changes
+	*/
+	UFUNCTION(BlueprintImplementableEvent, Category = "Pressure Plate")
+	void WeightChanged();
+
+protected:
 	/*
 	* Called once there is sufficient mass 'on' the plate
 	*/
@@ -39,6 +45,12 @@ protected:
 	void TriggerEffectEnd();
 
 	// Components
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Pressure Plate")
+	class UStaticMeshComponent* PressurePlateBaseMesh;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Pressure Plate")
+	class USceneComponent* PlateSceneComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Pressure Plate")
 	class UStaticMeshComponent* PressurePlateMesh;

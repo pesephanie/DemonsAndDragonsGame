@@ -12,11 +12,17 @@ ADD_PressurePlate::ADD_PressurePlate()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	PressurePlateBaseMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Pressure Plate Base Mesh"));
+	SetRootComponent(PressurePlateBaseMesh);
+
+	PlateSceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Plate Mesh Location Reference"));
+	PlateSceneComponent->SetupAttachment(PressurePlateBaseMesh);
+
 	PressurePlateMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Pressure Plate Mesh"));
-	SetRootComponent(PressurePlateMesh);
+	PressurePlateMesh->SetupAttachment(PlateSceneComponent);
 
 	PressureVolume = CreateDefaultSubobject<UBoxComponent>(TEXT("Pressure Volume"));
-	PressureVolume->SetupAttachment(PressurePlateMesh);
+	PressureVolume->SetupAttachment(PlateSceneComponent);
 }
 
 // Called when the game starts or when spawned
