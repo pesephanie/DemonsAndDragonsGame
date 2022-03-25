@@ -51,9 +51,9 @@ void ADD_PlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (bIsCarrying && CarriedObject) {
+	/*if (bIsCarrying && CarriedObject) {
 		CarriedObject->SetActorLocation(CarryObjectRef->GetComponentLocation(), true);
-	}
+	}*/
 	//DrawDebugLine(GetWorld(), LineStart, LineEnd, FColor{124, 252, 0, 255});
 }
 
@@ -213,6 +213,8 @@ bool ADD_PlayerCharacter::AttachCarryObject(class AActor* ActorToAttach) {
 	CarryObjectRef->SetWorldLocation(ActorToAttach->GetActorLocation());
 	bIsCarrying = true;
 	CarriedObject = ActorToAttach;
+	FAttachmentTransformRules AttachRules(EAttachmentRule::KeepWorld, false);
+	CarriedObject->AttachToComponent(CarryObjectRef, AttachRules);
 	return true;
 }
 
@@ -220,6 +222,8 @@ bool ADD_PlayerCharacter::DetachCarryObject() {
 	if (!CarriedObject) // No carried object to detach
 		return false;
 
+	FDetachmentTransformRules DetachRules(EDetachmentRule::KeepWorld, false);
+	CarriedObject->DetachFromActor(DetachRules);
 	bIsCarrying = false;
 	CarriedObject = nullptr;
 	return true;

@@ -69,6 +69,7 @@ void ADD_PressurePlate::AddCrate(ADD_PuzzleCrate* CrateRef) {
 			return;
 	}
 	PressureCrateList.Add(CrateRef);
+	WeightChanged();
 }
 
 void ADD_PressurePlate::RemoveCrate(ADD_PuzzleCrate* CrateRef) {
@@ -81,4 +82,5 @@ void ADD_PressurePlate::RemoveCrate(ADD_PuzzleCrate* CrateRef) {
 	}
 	if(index != -1)
 		PressureCrateList.RemoveAt(index);
+	WeightChanged();
 }

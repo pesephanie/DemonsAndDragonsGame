@@ -64,7 +64,6 @@ void ADD_PuzzleCrate::BeginOverlapWithOther(UPrimitiveComponent* OverlappedCompo
 		//UE_LOG(LogTemp, Warning, TEXT("%s: Begin overlap with plate: %s"), *GetName(), *Plate->GetName());
 		PlateRef = Plate;
 		PlateRef->AddCrate(this);
-		PlateRef->WeightChanged();
 		return;
 	}
 	//UE_LOG(LogTemp, Warning, TEXT("Crate Begin Overlap: Plate Invalid"));
@@ -75,7 +74,6 @@ void ADD_PuzzleCrate::BeginOverlapWithOther(UPrimitiveComponent* OverlappedCompo
 		if (PlateRef == nullptr && OtherCrate->PlateRef != nullptr) {
 			PlateRef = OtherCrate->PlateRef;
 			PlateRef->AddCrate(this);
-			PlateRef->WeightChanged();
 			return;
 		}
 	}
@@ -88,7 +86,6 @@ void ADD_PuzzleCrate::EndOverlapWithOther(UPrimitiveComponent* OverlappedCompone
 	if (Plate != nullptr && PlateRef != nullptr) {
 		//UE_LOG(LogTemp, Warning, TEXT("%s: End overlap with plate: %s"), *GetName(), *Plate->GetName());
 		PlateRef->RemoveCrate(this);
-		PlateRef->WeightChanged();
 		PlateRef = nullptr;
 		return;
 	}
